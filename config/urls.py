@@ -1,6 +1,5 @@
 """config URL Configuration
-
-The urlpatterns list routes URLs to views. For more information please see:
+The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
 Function views
@@ -16,6 +15,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 """=============Swagger docs============="""
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -29,6 +29,7 @@ swagger_view = get_schema_view(
     public=True
 )
 """======================================"""
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-from .serializers import CommentSerializer
 from main.serializers import CategorySerializer
 
 from .models import Comment, Rating
@@ -18,7 +17,7 @@ class CommentSerializer(ModelSerializer):
 
         return attrs
 
-    def to_representation(self, instance: Product):
+    def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['category'] = CategorySerializer(instance.category).data
         rep['comments'] = CommentSerializer(instance.comments.all(), many=True).data

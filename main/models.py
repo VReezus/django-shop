@@ -18,3 +18,14 @@ class Product(models.Model):
 
     def __str__(self):
         return f'[{self.category}] -> {self.title}'
+
+
+    @property
+    def average_rating(self):
+        ratings = self.ratings.all()
+        values = []
+        for rating in ratings:
+            values.append(rating.value)
+        if values:
+            return sum(values) / len(values)
+        return 0

@@ -1,5 +1,4 @@
 """config URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -37,4 +36,5 @@ urlpatterns = [
     path('docs/', swagger_view.with_ui('swagger', cache_timeout=0)),
     path('account/', include('account.urls')),
     path('', include('main.urls')),
+    path('', include('review.urls')),
 ]

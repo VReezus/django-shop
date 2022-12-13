@@ -2,13 +2,15 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser
 from rest_framework.decorators import action
 from django.db.models import Q
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from rest_framework.response import Response
 from .serializers import CategorySerializer, ProductSerializer
 from .models import Category, Product
 from .filters import ProductFilter 
 
 class CategoryViewSet(ModelViewSet):
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by('id')
     serializer_class = CategorySerializer
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
@@ -22,6 +24,11 @@ class ProductViewSet(ModelViewSet):
             return []#если это запрос на листинг или детализацию
         return [IsAdminUser()] #разрешаем всем
         
+    @swagger_auto_schema(manual_parameters=[
+        openapi.Parameter('q', openapi.IN_QUERY, type=openapi.TYPE_STRING)
+    ])
+
+
     @action(['GET'], detail=False)
     def search(self, request):
         q = request.query_params.get('q')
